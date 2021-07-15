@@ -1,12 +1,12 @@
-import { Paragraph, RadioButtonGroup } from 'grommet';
+import { Anchor, Box, Paragraph, RadioButtonGroup, Text } from 'grommet';
 import React from 'react';
 
 const radioOptions = [
+  { label: "None", value: "none" },
   { label: "Sex", value: "sex" },
   { label: "Color", value: "color" },
   { label: "Birthday", value: "birthday" },
   { label: "Hips", value: "hips" },
-  { label: "None", value: "none" },
 ];
 
 const attributes = {
@@ -25,8 +25,8 @@ function setAttributeFromRadio(selectedValue, setVisibleAttribute) {
 
 export default function ManageTree({ currentNode, manageTreeRef, setVisibleAttribute }) {
   return (
-    <div className="manageTree" tabIndex={-1} ref={manageTreeRef}>
-      <div className="dogDetails">
+    <div className="manageTree">
+      <div className="dogDetails" tabIndex={-1} ref={manageTreeRef}>
         <div className="sectionHeader">{currentNode.name}</div>
         <div className="dogAttributes">
           <div>Sex: {currentNode.attributes.sex}<br></br></div>
@@ -41,10 +41,16 @@ export default function ManageTree({ currentNode, manageTreeRef, setVisibleAttri
           <div>DNA: {currentNode.attributes.dnaInfo}<br></br></div>
           {currentNode.attributes.ofaLink !== "None"
             && currentNode.attributes.ofaLink !== ""
-            && <div>
-              <a href={currentNode.attributes.ofaLink}>OFA Page</a>
-              <br></br>
-            </div>}
+            &&
+            <div>
+              <Anchor
+                default
+                href={currentNode.attributes.ofaLink}
+                target="_blank"
+                label="Open OFA Page in New Tab"
+              />
+            </div>
+          }
         </div>
       </div>
       <div className="controls">
@@ -57,14 +63,15 @@ export default function ManageTree({ currentNode, manageTreeRef, setVisibleAttri
       </div>
       <div className="about">
         <div className="sectionHeader">About</div>
-        <Paragraph>
-          This is web app is very much a work in progress. Please
-          contact me with any accessibility errors or bugs!
-        </Paragraph>
-        <Paragraph>
+        <Text>
+          This web app is a work in progress and
+          is not compatible with small screens. Please
+          reach out with any accessibility errors!
+        </Text>
+        <Text size="small" margin={{ "top": "auto" }}>
           Created with &#9829; by&nbsp;
-          <a href="https://arielrezin.com" target="_blank">Ariel Rezin</a>
-        </Paragraph>
+          <Anchor href="https://arielrezin.com" target="_blank" label="Ariel Rezin" />
+        </Text>
       </div>
     </div>
   );
