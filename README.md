@@ -1,6 +1,6 @@
 # About
 
-I have a dog named (Gilligan)[https://instagram.com/gilthepoodle] who's a pretty great dude. I started doing some research and wanted to collect all of my findings, which led to the creation of this web app.
+I have a dog named Gilligan who's a pretty great dude. I started doing some research and wanted to collect all of my findings, which led to the creation of this web app. If you want dog pics, check out https://instagram.com/gilthepoodle.
 
 # Resources
 
