@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/pedigree/static/css/main.bf16ff8e.chunk.css",
-    "main.js": "/pedigree/static/js/main.3995fc05.chunk.js",
-    "main.js.map": "/pedigree/static/js/main.3995fc05.chunk.js.map",
+    "main.css": "/pedigree/static/css/main.78347d99.chunk.css",
+    "main.js": "/pedigree/static/js/main.e09eb0a4.chunk.js",
+    "main.js.map": "/pedigree/static/js/main.e09eb0a4.chunk.js.map",
     "runtime-main.js": "/pedigree/static/js/runtime-main.a585bc3d.js",
     "runtime-main.js.map": "/pedigree/static/js/runtime-main.a585bc3d.js.map",
-    "static/js/2.9361d3c8.chunk.js": "/pedigree/static/js/2.9361d3c8.chunk.js",
-    "static/js/2.9361d3c8.chunk.js.map": "/pedigree/static/js/2.9361d3c8.chunk.js.map",
+    "static/js/2.811e94e0.chunk.js": "/pedigree/static/js/2.811e94e0.chunk.js",
+    "static/js/2.811e94e0.chunk.js.map": "/pedigree/static/js/2.811e94e0.chunk.js.map",
     "index.html": "/pedigree/index.html",
-    "static/css/main.bf16ff8e.chunk.css.map": "/pedigree/static/css/main.bf16ff8e.chunk.css.map",
-    "static/js/2.9361d3c8.chunk.js.LICENSE.txt": "/pedigree/static/js/2.9361d3c8.chunk.js.LICENSE.txt"
+    "static/css/main.78347d99.chunk.css.map": "/pedigree/static/css/main.78347d99.chunk.css.map",
+    "static/js/2.811e94e0.chunk.js.LICENSE.txt": "/pedigree/static/js/2.811e94e0.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.a585bc3d.js",
-    "static/js/2.9361d3c8.chunk.js",
-    "static/css/main.bf16ff8e.chunk.css",
-    "static/js/main.3995fc05.chunk.js"
+    "static/js/2.811e94e0.chunk.js",
+    "static/css/main.78347d99.chunk.css",
+    "static/js/main.e09eb0a4.chunk.js"
   ]
 }
