@@ -34,11 +34,15 @@ Here's my rough plan for implementation in src/updateJson.js:
 1. Save the JSON data to a file for future reference
 
 # // TODO
-1. Add a link to the published site that leads to the project's Github
-1. Add a picture of Gil
+1. ~~Add a link to the published site that leads to the project's Github~~
+1. ~~Move the toolbar from the bottom to the left hand side of the window~~
+1. ~~Add a picture of Gil~~
+1. ~~Only start off showing 4-5 generations on the tree~~
 1. Change my website so it links to this instead of Gil's instagram
+1. Always display the focus indicator on whichever dog has its details displayed on the sidebar
+1. Make the "About" section in the sidebar collapsible
 1. Finish implementing the code that automatically creates a new  JSON from the spreadsheet in Google Drive
+1. Add data from http://www.standardpoodledatabase.com
 1. Add a toggle that allows the user to have a node automatically centered when it receives focus
 1. Display a count of the total number of generations (aka the tree depth) and the currently displayed number of generations
-1. Only start off showing 4-5 generations on the tree
-1. Change the URL to my personal site instead of Github when I get a chance
+1. Change the base URL to my personal site instead of Github when I get a chance
