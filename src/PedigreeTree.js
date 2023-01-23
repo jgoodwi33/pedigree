@@ -75,11 +75,12 @@ export default function PedigreeTree({ pedigree, setCurrentNode, manageTreeRef, 
         initialDepth="4"
         pathFunc="step"
         depthFactor="700"
-        zoom=".05"
+        zoom=".25"
         nodeSize={nodeSize}
+        // dimensions={{ height: 300, width: 600 }}  // should automatically center the currently focused node if defined properly
         separation={{ nonSiblings: 1.4, siblings: 1.2 }}
         scaleExtent={{ max: .5, min: .05 }}
-        translate={{ x: 100, y: 200 }}
+        translate={{ x: 100, y: 350 }}
         pathClassFunc={() => 'path'}
         renderCustomNodeElement={(rd3tProps) =>
           renderForeignObjectNode({

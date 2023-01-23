@@ -19,18 +19,18 @@ function App() {
 
   return (
     <Grommet>
-      <div className="App" style={{ height: "98.5vh" }}>
-        <PedigreeTree
-          pedigree={pedigree}
-          setCurrentNode={(node) => setCurrentNode(node)}
-          manageTreeRef={manageTreeRef}
-          visibleAttributeProps={visibleAttribute}
-        />
+      <div className="App" style={{ height: "100vh" }}>
         <ManageTree
           currentNode={currentNode}
           manageTreeRef={manageTreeRef}
           visibleAttribute={visibleAttribute}
           setVisibleAttribute={(attributeObj) => setVisibleAttribute(attributeObj)}
+        />
+        <PedigreeTree
+          pedigree={pedigree}
+          setCurrentNode={(node) => setCurrentNode(node)}
+          manageTreeRef={manageTreeRef}
+          visibleAttributeProps={visibleAttribute}
         />
       </div>
     </Grommet>
