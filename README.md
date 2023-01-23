@@ -1,6 +1,8 @@
 # About
 
-I have a standard poodle named Gilligan who's a pretty great dude. I started doing some research and wanted to collect all of my findings, which led to the creation of this web app. If you want more dog pics, check out https://instagram.com/gilthepoodle.
+I have a standard poodle named Gilligan who's a pretty great dude. I started doing some research and wanted to collect all of my findings, which led to the creation of this web app. Check it out at https://arielrezinn.github.io/pedigree/! 
+
+If you want more dog pics, take a look at https://instagram.com/gilthepoodle.
 
 # Resources
 
