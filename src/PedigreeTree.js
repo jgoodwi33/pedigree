@@ -72,7 +72,7 @@ export default function PedigreeTree({ pedigree, setCurrentNode, manageTreeRef, 
     <div className="treeWrapper">
       <Tree
         data={pedigree}
-        // initialDepth="4"
+        initialDepth="4"
         pathFunc="step"
         depthFactor="700"
         zoom=".05"
