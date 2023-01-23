@@ -1,4 +1,4 @@
-import { Anchor, Box, Paragraph, RadioButtonGroup, Text } from 'grommet';
+import { Anchor, RadioButtonGroup, Text } from 'grommet';
 import React from 'react';
 
 const radioOptions = [
