@@ -1,5 +1,6 @@
-import { Anchor, RadioButtonGroup, Text } from 'grommet';
+import { Anchor, Avatar, Box, Heading, RadioButtonGroup, Text } from 'grommet';
 import React from 'react';
+import gilHeadshot from './assets/gilHeadshot.png';
 
 const radioOptions = [
   { label: "None", value: "none" },
@@ -26,6 +27,12 @@ function setAttributeFromRadio(selectedValue, setVisibleAttribute) {
 export default function ManageTree({ currentNode, manageTreeRef, setVisibleAttribute }) {
   return (
     <div className="manageTree">
+      <Box direction="row" gap="10px" alignContent="center">
+        <Avatar display="inline" round="large" background="accent-1" a11yTitle="the head of a red standard poodle staring into the camera" src={gilHeadshot} />
+        <Heading size="small" margin="none">
+          Gil's Pedigree
+        </Heading>
+      </Box>
       <div className="dogDetails" tabIndex={-1} ref={manageTreeRef}>
         <div className="sectionHeader">{currentNode.name}</div>
         <div className="dogAttributes">
@@ -66,7 +73,11 @@ export default function ManageTree({ currentNode, manageTreeRef, setVisibleAttri
         <Text>
           This web app is a work in progress and
           is not compatible with small screens. Please
-          reach out with any accessibility errors!
+          reach out with any accessibility errors.
+        </Text>
+        <Text margin={{ "top": "10px", "bottom": "10px" }}>
+          You can also&nbsp;
+          <Anchor href="https://github.com/arielrezinn/pedigree" label="view this project on Github!" />
         </Text>
         <Text size="small" margin={{ "top": "auto" }}>
           Created with &#9829; by&nbsp;
