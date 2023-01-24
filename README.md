@@ -25,9 +25,9 @@ Download the spreadsheet as a CSV (manually or by visiting [this link](https://d
 I'm figuring out a new way to do this because I don't remember how I did it before! When my implementation is done, you'll be able to get refreshed data directly from Google Sheets by entering `npm run refresh`
 
 Here's my rough plan for implementation in src/updateJson.js:
-1. Grab the data as a CSV from Google Sheets
-1. Convert the CSV into a single-level JSON
-1. Save each item in the JSON to a key/value data structure with the key for each item being its "Offspring Reg #"
+1. ~~Grab the data as a CSV from Google Sheets~~
+1. ~~Convert the CSV into a single-level JSON~~
+1. ~~Save each item in the flat JSON to a key/value data structure with the key for each item being its "Offspring Reg #"~~
 1. Recursively create the nested tree structure
    1. Start with Gil as the root node, then for each node...
    1. Copy its name and attributes values into the node
