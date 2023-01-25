@@ -5,16 +5,18 @@ import Tree from 'react-d3-tree';
 const renderForeignObjectNode = ({
   nodeDatum,
   toggleNode,
-  setCurrentNode,
   // manageTreeRef,
   foreignObjectProps,
-  visibleAttributeProps
+  visibleAttributeProps,
+  setCurrentNode,
+  currentNode
 }) => (
   <g>
     {/* `foreignObject` requires width & height to be explicitly set. */}
     <foreignObject {...foreignObjectProps}>
       <div style={{ height: "92%", width: "97%" }} data-xmlns="http://www.w3.org/1999/xhtml">
         <Box
+          id="node"
           tabIndex="0"
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
@@ -28,7 +30,7 @@ const renderForeignObjectNode = ({
           background="light-2"
           elevation="large"
           fill={true}
-          id="node"
+          className={nodeDatum === currentNode ? 'currentlySelected' : ''}
         >
           <Box flex={true} pad="medium" justify="around">
             <Heading size="xxsmall" truncate={true} textAlign="center" margin="none" pad="none" gap="none" align="center">
@@ -60,7 +62,7 @@ const renderForeignObjectNode = ({
   </g >
 );
 
-export default function PedigreeTree({ pedigree, setCurrentNode, manageTreeRef, visibleAttributeProps }) {
+export default function PedigreeTree({ pedigree, manageTreeRef, visibleAttributeProps, setCurrentNode, currentNode }) {
   const nodeSize = { x: 500, y: 250 };
   const nodePositionX = nodeSize.x / -2;
   const nodePositionY = nodeSize.y / -2;
@@ -83,10 +85,11 @@ export default function PedigreeTree({ pedigree, setCurrentNode, manageTreeRef, 
         renderCustomNodeElement={(rd3tProps) =>
           renderForeignObjectNode({
             ...rd3tProps,
-            setCurrentNode,
-            manageTreeRef,
+            // manageTreeRef,
             foreignObjectProps,
-            visibleAttributeProps
+            visibleAttributeProps,
+            setCurrentNode,
+            currentNode
           })
         }
       />

@@ -44,9 +44,10 @@ function App() {
         />
         <PedigreeTree
           pedigree={pedigree}
-          setCurrentNode={(node) => setCurrentNode(node)}
           manageTreeRef={manageTreeRef}
           visibleAttributeProps={visibleAttribute}
+          setCurrentNode={(node) => setCurrentNode(node)}
+          currentNode={currentNode}
         />
       </div>
     </Grommet>

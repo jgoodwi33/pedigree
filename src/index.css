@@ -17,6 +17,10 @@ body {
   border: 25px dashed #97fbb6;
   outline: none;
 }
+#node.currentlySelected {
+  background-color: #97fbb6;
+  border: none;
+}
 .path {
   stroke-width: 5;
   fill: #797a7a;
