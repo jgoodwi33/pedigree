@@ -1,5 +1,5 @@
-import { Anchor, Avatar, Box, Heading, RadioButtonGroup, Text } from 'grommet';
-import React from 'react';
+import { Accordion, AccordionPanel, Anchor, Avatar, Box, Heading, RadioButtonGroup, Text } from 'grommet';
+import React, { useState } from 'react';
 import gilHeadshot from './assets/gilHeadshot.png';
 
 const radioOptions = [
@@ -24,17 +24,26 @@ function setAttributeFromRadio(selectedValue, setVisibleAttribute) {
   setVisibleAttribute(newAttributes)
 }
 
+const renderPanelHeader = (title, active) => (
+  <Box className="sectionHeader" direction="row" align="center" gap="small">
+    <Heading level='2' size='small' margin={{ vertical: "small" }}>{title}</Heading>
+    <Text size="small" color="brand">{active ? 'hide section' : 'show section'}</Text>
+  </Box>
+);
+
 export default function ManageTree({ currentNode, manageTreeRef, setVisibleAttribute }) {
+  const [activeIndex, setActiveIndex] = useState([0]);
+
   return (
     <div className="manageTree">
-      <Box direction="row" gap="10px" alignContent="center">
-        <Avatar display="inline" round="large" background="accent-1" a11yTitle="the head of a red standard poodle staring into the camera" src={gilHeadshot} />
-        <Heading size="small" margin="none">
+      <Box direction="row" gap="10px" align="center">
+        <Avatar round="large" background="accent-1" a11yTitle="the head of a red standard poodle staring into the camera" src={gilHeadshot} />
+        <Heading level='1' size="small" margin="none">
           Gil's Pedigree
         </Heading>
       </Box>
       <div className="dogDetails" tabIndex={-1} ref={manageTreeRef}>
-        <div className="sectionHeader">{currentNode.name}</div>
+        <Heading level='2' size='small' margin={{ vertical: "small" }}>{currentNode.name}</Heading>
         <div className="dogAttributes">
           <div>Sex: {currentNode.attributes.sex}<br></br></div>
           <div>Color: {currentNode.attributes.color}<br></br></div>
@@ -61,29 +70,30 @@ export default function ManageTree({ currentNode, manageTreeRef, setVisibleAttri
         </div>
       </div>
       <div className="controls">
-        <div className="sectionHeader">Show on Pedigree</div>
+        <Heading level='2' size='small' margin={{ vertical: "small" }}>Show on Pedigree</Heading>
         <RadioButtonGroup
           name="Show on Pedigree"
           options={radioOptions}
           onChange={(e) => setAttributeFromRadio(e.target.value, setVisibleAttribute)}
         />
       </div>
-      <div className="about">
-        <div className="sectionHeader">About</div>
-        <Text>
-          This web app is a work in progress and
-          is not compatible with small screens. Please
-          reach out with any accessibility errors.
-        </Text>
-        <Text margin={{ "top": "10px", "bottom": "10px" }}>
-          You can also&nbsp;
-          <Anchor href="https://github.com/arielrezinn/pedigree" label="view this project on Github!" />
-        </Text>
-        <Text size="small" margin={{ "top": "auto" }}>
-          Created with &#9829; by&nbsp;
-          <Anchor href="https://arielrezin.com" target="_blank" label="Ariel Rezin" />
-        </Text>
-      </div>
+      <Accordion activeIndex={activeIndex} onActive={(newActiveIndex) => setActiveIndex(newActiveIndex)}>
+        <AccordionPanel className="about" header={renderPanelHeader('About', activeIndex.includes(0))}>
+          <Text>
+            This web app is a work in progress and
+            is not compatible with small screens. Please
+            reach out with any accessibility errors.
+          </Text>
+          <Text margin={{ "top": "10px", "bottom": "10px" }}>
+            <Anchor href="https://github.com/arielrezinn/pedigree" label="View this project on Github!" />
+          </Text>
+          <Text size="small" margin={{ "top": "auto" }}>
+            Created with &#9829; by&nbsp;
+            <Anchor href="https://arielrezin.com" target="_blank" label="Ariel Rezin" />
+          </Text>
+        </AccordionPanel>
+        {/* <div className="sectionHeader">About</div> */}
+      </Accordion>
     </div>
   );
 }

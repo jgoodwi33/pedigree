@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
-import { Grommet } from 'grommet';
+import { Grommet, grommet } from 'grommet';
 import PedigreeTree from './PedigreeTree';
 import ManageTree from './ManageTree';
+import { deepMerge } from 'grommet/utils';
 
 
 const pedigree = require('./pedigree.json');
@@ -11,6 +12,21 @@ const attributes = {
   birthday: false,
   hips: false,
 };
+const customTheme = deepMerge(grommet, {
+  heading: {
+    level: {
+      2: {
+        small: {
+          size: '20px',
+          height: '20px',
+        },
+      },
+    },
+  },
+  accordion: {
+    border: undefined,
+  }
+});
 
 function App() {
   const [currentNode, setCurrentNode] = useState(pedigree);
@@ -18,7 +34,7 @@ function App() {
   const manageTreeRef = useRef();
 
   return (
-    <Grommet>
+    <Grommet theme={customTheme}>
       <div className="App" style={{ height: "100vh" }}>
         <ManageTree
           currentNode={currentNode}

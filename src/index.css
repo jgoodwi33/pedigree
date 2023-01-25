@@ -40,10 +40,6 @@ body {
   border: 7px dashed #97fbb6;
   outline: none;
 }
-.manageTree .sectionHeader {
-  font-weight: 700;
-  margin-bottom: 6px;
-}
 .dogDetails {
   display: flex;
   flex-direction: column;

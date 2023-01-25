@@ -6,7 +6,7 @@ const renderForeignObjectNode = ({
   nodeDatum,
   toggleNode,
   setCurrentNode,
-  manageTreeRef,
+  // manageTreeRef,
   foreignObjectProps,
   visibleAttributeProps
 }) => (
@@ -17,14 +17,12 @@ const renderForeignObjectNode = ({
         <Box
           tabIndex="0"
           onKeyDown={(e) => {
-            if (e.key === "ArrowLeft"
-              || e.key === "ArrowRight"
-              || e.key === " ") {
+            if (e.key === "Enter" || e.key === " ") {
               toggleNode()
             }
-            if (e.key === "Enter") {
-              manageTreeRef.current.focus()
-            }
+            // if (e.key === "Enter") {
+            //   manageTreeRef.current.focus()
+            // }
           }}
           onFocus={() => { setCurrentNode(nodeDatum) }}
           background="light-2"
