@@ -47,7 +47,7 @@ const renderForeignObjectNode = ({
           tabIndex="0"
           // tabIndex={nodeDatum === currentNode ? "0" : "-1"} // this should only be uncommented once arrow key nav is completely functioning
           onKeyDown={(e) => handleKeyPress(e, toggleNode, nodeDatum)}
-          onFocus={() => { setCurrentNode(nodeDatum); console.log("current node set to " + nodeDatum) }}
+          onFocus={() => { setCurrentNode(nodeDatum); console.log("current node set to " + nodeDatum.name) }}
           ref={currentNodeRef}
           background="light-2"
           elevation="large"
