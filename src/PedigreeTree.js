@@ -1,6 +1,32 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Box, Button, Heading, Text } from 'grommet';
 import Tree from 'react-d3-tree';
+
+function handleKeyPress(e, toggleNode, nodeDatum) {
+  if (e.key === "Enter" || e.key === " ") {
+    toggleNode();
+    console.log(nodeDatum);
+  }
+  if (e.key === "ArrowRight") {
+    console.log("right arrow")
+    // move focus to first child node (aka the dog's first parent)
+  }
+  if (e.key === "ArrowLeft") {
+    console.log("left arrow")
+    // move focus to parent node (aka the dog's child)
+  }
+  if (e.key === "ArrowDown") {
+    console.log("down arrow")
+    // move focus to next node of same depth
+  }
+  if (e.key === "ArrowUp") {
+    console.log("up arrow")
+    // move focus to previous node of same depth
+  }
+  // if (e.key === "Enter") {
+  //   manageTreeRef.current.focus()
+  // }
+}
 
 const renderForeignObjectNode = ({
   nodeDatum,
@@ -9,7 +35,8 @@ const renderForeignObjectNode = ({
   foreignObjectProps,
   visibleAttributeProps,
   setCurrentNode,
-  currentNode
+  currentNode,
+  currentNodeRef
 }) => (
   <g>
     {/* `foreignObject` requires width & height to be explicitly set. */}
@@ -18,19 +45,14 @@ const renderForeignObjectNode = ({
         <Box
           id="node"
           tabIndex="0"
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              toggleNode()
-            }
-            // if (e.key === "Enter") {
-            //   manageTreeRef.current.focus()
-            // }
-          }}
-          onFocus={() => { setCurrentNode(nodeDatum) }}
+          // tabIndex={nodeDatum === currentNode ? "0" : "-1"} // this should only be uncommented once arrow key nav is completely functioning
+          onKeyDown={(e) => handleKeyPress(e, toggleNode, nodeDatum)}
+          onFocus={() => { setCurrentNode(nodeDatum); console.log("current node set to " + nodeDatum) }}
+          ref={currentNodeRef}
           background="light-2"
           elevation="large"
           fill={true}
-          className={nodeDatum === currentNode ? 'currentlySelected' : ''}
+          className={nodeDatum === currentNode ? "currentlySelected" : ""}
         >
           <Box flex={true} pad="medium" justify="around">
             <Heading size="xxsmall" truncate={true} textAlign="center" margin="none" pad="none" gap="none" align="center">
@@ -44,7 +66,7 @@ const renderForeignObjectNode = ({
               {nodeDatum.children.length !== 0 && (
                 <div>
                   <Button
-                    onClick={toggleNode}
+                    onClick={(e) => { toggleNode(e); currentNodeRef.current.focus() }}
                     tabIndex="-1"
                     label={nodeDatum.__rd3t.collapsed ? "Show Ancestors" : "Hide Ancestors"}
                     size="xxlarge"
@@ -67,6 +89,8 @@ export default function PedigreeTree({ pedigree, manageTreeRef, visibleAttribute
   const nodePositionX = nodeSize.x / -2;
   const nodePositionY = nodeSize.y / -2;
   const foreignObjectProps = { width: nodeSize.x, height: nodeSize.y, x: nodePositionX, y: nodePositionY };
+  const currentNodeRef = useRef();
+
   return (
     // `<Tree />` will fill width/height of its container`.
     <div className="treeWrapper">
@@ -89,7 +113,8 @@ export default function PedigreeTree({ pedigree, manageTreeRef, visibleAttribute
             foreignObjectProps,
             visibleAttributeProps,
             setCurrentNode,
-            currentNode
+            currentNode,
+            currentNodeRef
           })
         }
       />

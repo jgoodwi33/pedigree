@@ -42,7 +42,9 @@ Here's my rough plan for implementation in src/updateJson.js:
 1. ~~Only start off showing 4-5 generations on the tree~~
 1. ~~Change my website so it links to this instead of Gil's instagram~~
 1. ~~Make the "About" section in the sidebar collapsible~~
-1. Always display the focus indicator on whichever dog has its details displayed on the sidebar
+1. ~~Always display the focus indicator on whichever dog has its details displayed on the sidebar~~
+1. Use arrow keys to navigate within the tree, only the currently selected dog can recieve tab focus
+1. Ensure that a tree node is "selected" at all times
 1. Finish implementing the code that automatically creates a new  JSON from the spreadsheet in Google Drive
 1. Add data from http://www.standardpoodledatabase.com
 1. Add a toggle that allows the user to have a node automatically centered when it receives focus

@@ -13,6 +13,13 @@ const attributes = {
   hips: false,
 };
 const customTheme = deepMerge(grommet, {
+  global: {
+    focus: {
+      outline: { color: 'focus', size: '5px' },
+      border: { color: undefined, style: undefined },
+      shadow: { color: undefined, size: undefined },
+    },
+  },
   heading: {
     level: {
       2: {

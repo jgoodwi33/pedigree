@@ -13,13 +13,17 @@ body {
   border: 5px solid blue;
   border: 5px solid red;
 }
-#node:focus {
-  border: 25px dashed #97fbb6;
+/* #node:focus {
+  border: 25px solid #97fbb6;
   outline: none;
-}
+} */
 #node.currentlySelected {
-  background-color: #97fbb6;
-  border: none;
+  /* background-color: #97fbb6; */
+  border: 10px solid #7D4CDB;
+}
+#node:focus-visible {
+  border: 20px solid #97fbb6;
+  outline: none;
 }
 .path {
   stroke-width: 5;
@@ -40,17 +44,10 @@ body {
 .treeWrapper {
   flex: 3 1 0;
 }
-.manageTree:focus {
-  border: 7px dashed #97fbb6;
-  outline: none;
-}
 .dogDetails {
   display: flex;
   flex-direction: column;
   /* border: 5px solid red; */
-}
-.dogDetails:focus {
-  outline: 3px solid #97fbb6;
 }
 .dogAttributes {
   flex-grow: 1;
