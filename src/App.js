@@ -6,6 +6,8 @@ import { deepMerge } from 'grommet/utils';
 
 
 const pedigree = require('./pedigree.json');
+// const pedigree = require('./newPedigree.json');
+
 const initialAttributes = {
   none: true,
   sex: false,

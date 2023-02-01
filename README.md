@@ -46,6 +46,7 @@ Here's my rough plan for implementation in src/updateJson.js:
 1. ~~Ensure that a tree node is "selected" at all times~~
 1. ~~Create skip links for easy keyboard navigation between the dog details and the tree~~
 1. Finish implementing the code that automatically creates a new  JSON from the spreadsheet in Google Drive
+1. Fix the tab focus management behavior so when the skip link is used, focus is shifted back to the specific instance of a dog that they started at, instead of the first insatnce of that dog in the tree
 1. Add data from http://www.standardpoodledatabase.com
 1. Add a modal to the about section that explains how to use keyboard nav on the site
 1. Add a toggle that allows the user to have a node automatically centered when it receives focus

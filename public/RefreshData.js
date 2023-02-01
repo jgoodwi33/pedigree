@@ -45,11 +45,20 @@ function createFlatJsonFile(json) {
     })
 }
 
+// function createJsonFile(json) {
+//     fs.writeFile("./public/refreshDataAssets/newPedigree.json", JSON.stringify(json, null, 3), (err) => {
+//         if (err) throw err;
+//         else {
+//             console.log("newPedigree.json was created! it can be found at ./public/refreshDataAssets/newPedigree.json");
+//         }
+//     })
+// }
+
 function createJsonFile(json) {
-    fs.writeFile("./public/refreshDataAssets/pedigree.json", JSON.stringify(json), (err) => {
+    fs.writeFile("./src/newPedigree.json", JSON.stringify(json, null, 3), (err) => {
         if (err) throw err;
         else {
-            console.log("pedigree.json was created! it can be found at ./public/refreshDataAssets/pedigree.json");
+            console.log("newPedigree.json was created! it can be found at ./src/newPedigree.json");
         }
     })
 }
@@ -69,6 +78,43 @@ function TreeNode(element) {
     };
     this.children = [];
     this.name = element["Registered Name"];
+}
+
+function createTree(node, parentMap) {
+    if (parentMap.has(node.attributes.registrationNum)) {
+        // this section works but creates some empty treeNodes
+        // let parents = parentMap.get(node.attributes.registrationNum)
+        // node.children[0] = new TreeNode(parents[0])
+        // node.children[1] = new TreeNode(parents[1])
+        // createTree(node.children[0], parentMap)
+        // createTree(node.children[1], parentMap)
+
+        // this code results in null being added as an element to some children arrays
+        // let parents = parentMap.get(node.attributes.registrationNum)
+        // if (parents[0]["Registration #"] != undefined) {
+        //     node.children[0] = new TreeNode(parents[0])
+        //     createTree(node.children[0], parentMap)
+        // }
+        // if (parents[1]["Registration #"] != undefined) {
+        //     node.children[1] = new TreeNode(parents[1])
+        //     createTree(node.children[1], parentMap)
+        // }
+
+        // this is my attempt at eliminating the issues
+        let parents = parentMap.get(node.attributes.registrationNum)
+        if (parents[0]["Registration #"] != undefined) {
+            node.children.push(new TreeNode(parents[0]))
+        }
+        if (parents[1]["Registration #"] != undefined) {
+            node.children.push(new TreeNode(parents[1]))
+        }
+        if (node.children.length > 0) {
+            node.children.forEach((child) => { createTree(child, parentMap) })
+        }
+    } else {
+        // return, because that means that the current node does not have parent nodes  
+        return node
+    }
 }
 
 function createHierarchalJson(flatJson) {
@@ -97,7 +143,7 @@ function createHierarchalJson(flatJson) {
     })
 
     // TODO: create the tree structure by calling a recursive method on the root var
-    // TODO: write the aforementioned recursive method
+    createTree(root, parentMap);
 
     // save the tree structure to a file
     createJsonFile(root);
