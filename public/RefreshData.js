@@ -82,25 +82,6 @@ function TreeNode(element) {
 
 function createTree(node, parentMap) {
     if (parentMap.has(node.attributes.registrationNum)) {
-        // this section works but creates some empty treeNodes
-        // let parents = parentMap.get(node.attributes.registrationNum)
-        // node.children[0] = new TreeNode(parents[0])
-        // node.children[1] = new TreeNode(parents[1])
-        // createTree(node.children[0], parentMap)
-        // createTree(node.children[1], parentMap)
-
-        // this code results in null being added as an element to some children arrays
-        // let parents = parentMap.get(node.attributes.registrationNum)
-        // if (parents[0]["Registration #"] != undefined) {
-        //     node.children[0] = new TreeNode(parents[0])
-        //     createTree(node.children[0], parentMap)
-        // }
-        // if (parents[1]["Registration #"] != undefined) {
-        //     node.children[1] = new TreeNode(parents[1])
-        //     createTree(node.children[1], parentMap)
-        // }
-
-        // this is my attempt at eliminating the issues
         let parents = parentMap.get(node.attributes.registrationNum)
         if (parents[0]["Registration #"] != undefined) {
             node.children.push(new TreeNode(parents[0]))
