@@ -43,10 +43,13 @@ Here's my rough plan for implementation in src/updateJson.js:
 1. ~~Change my website so it links to this instead of Gil's instagram~~
 1. ~~Make the "About" section in the sidebar collapsible~~
 1. ~~Always display the focus indicator on whichever dog has its details displayed on the sidebar~~
-1. Use arrow keys to navigate within the tree, only the currently selected dog can recieve tab focus
-1. Ensure that a tree node is "selected" at all times
+1. ~~Ensure that a tree node is "selected" at all times~~
+1. ~~Create skip links for easy keyboard navigation between the dog details and the tree~~
 1. Finish implementing the code that automatically creates a new  JSON from the spreadsheet in Google Drive
 1. Add data from http://www.standardpoodledatabase.com
+1. 1. Make the "About" section stay sticky to the bottom
+1. Add a modal in the about section that explains how to use keyboard nav on the site
 1. Add a toggle that allows the user to have a node automatically centered when it receives focus
+1. Make the radio button group have an initial value of "none" set when the page loads
 1. Display a count of the total number of generations (aka the tree depth) and the currently displayed number of generations
 1. Change the base URL to my personal site instead of Github when I get a chance

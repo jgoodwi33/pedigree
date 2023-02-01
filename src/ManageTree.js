@@ -1,4 +1,14 @@
-import { Accordion, AccordionPanel, Anchor, Avatar, Box, Heading, RadioButtonGroup, Text } from 'grommet';
+import {
+  Accordion,
+  AccordionPanel,
+  Anchor,
+  Avatar,
+  Box,
+  Button,
+  Heading,
+  RadioButtonGroup,
+  Text
+} from 'grommet';
 import React, { useState } from 'react';
 import gilHeadshot from './assets/gilHeadshot.png';
 
@@ -10,7 +20,8 @@ const radioOptions = [
   { label: "Hips", value: "hips" },
 ];
 
-const attributes = {
+const blankAttributes = {
+  none: false,
   sex: false,
   color: false,
   birthday: false,
@@ -19,7 +30,7 @@ const attributes = {
 
 function setAttributeFromRadio(selectedValue, setVisibleAttribute) {
   console.log(selectedValue)
-  var newAttributes = JSON.parse(JSON.stringify(attributes))
+  let newAttributes = JSON.parse(JSON.stringify(blankAttributes))
   newAttributes[selectedValue] = true
   setVisibleAttribute(newAttributes)
 }
@@ -31,7 +42,7 @@ const renderPanelHeader = (title, active) => (
   </Box>
 );
 
-export default function ManageTree({ currentNode, manageTreeRef, setVisibleAttribute }) {
+export default function ManageTree({ currentNode, visibleAttribute, setVisibleAttribute }) {
   const [activeIndex, setActiveIndex] = useState([0]);
 
   return (
@@ -42,7 +53,7 @@ export default function ManageTree({ currentNode, manageTreeRef, setVisibleAttri
           Gil's Pedigree
         </Heading>
       </Box>
-      <div className="dogDetails" tabIndex={-1} ref={manageTreeRef}>
+      <div className="dogDetails" tabIndex={-1}>
         <Heading level='2' size='small' margin={{ vertical: "small" }}>{currentNode.name}</Heading>
         <div className="dogAttributes">
           <div>Sex: {currentNode.attributes.sex}<br></br></div>
@@ -68,6 +79,12 @@ export default function ManageTree({ currentNode, manageTreeRef, setVisibleAttri
             </div>
           }
         </div>
+        <Button
+          className="moveFocusButton"
+          onClick={() => document.getElementsByClassName("currentlySelected")[0].focus()}
+          label="Move focus to the tree"
+          plain={true}
+        />
       </div>
       <div className="controls">
         <Heading level='2' size='small' margin={{ vertical: "small" }}>Show on Pedigree</Heading>
@@ -77,7 +94,7 @@ export default function ManageTree({ currentNode, manageTreeRef, setVisibleAttri
           onChange={(e) => setAttributeFromRadio(e.target.value, setVisibleAttribute)}
         />
       </div>
-      <Accordion activeIndex={activeIndex} onActive={(newActiveIndex) => setActiveIndex(newActiveIndex)}>
+      <Accordion className="stickToBottom" activeIndex={activeIndex} onActive={(newActiveIndex) => setActiveIndex(newActiveIndex)}>
         <AccordionPanel className="about" header={renderPanelHeader('About', activeIndex.includes(0))}>
           <Text>
             This web app is a work in progress and

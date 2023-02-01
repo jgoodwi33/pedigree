@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Grommet, grommet } from 'grommet';
 import PedigreeTree from './PedigreeTree';
 import ManageTree from './ManageTree';
@@ -6,7 +6,8 @@ import { deepMerge } from 'grommet/utils';
 
 
 const pedigree = require('./pedigree.json');
-const attributes = {
+const initialAttributes = {
+  none: true,
   sex: false,
   color: false,
   birthday: false,
@@ -37,24 +38,21 @@ const customTheme = deepMerge(grommet, {
 
 function App() {
   const [currentNode, setCurrentNode] = useState(pedigree);
-  const [visibleAttribute, setVisibleAttribute] = useState(attributes)
-  const manageTreeRef = useRef();
+  const [visibleAttribute, setVisibleAttribute] = useState(initialAttributes)
 
   return (
     <Grommet theme={customTheme}>
       <div className="App" style={{ height: "100vh" }}>
         <ManageTree
           currentNode={currentNode}
-          manageTreeRef={manageTreeRef}
           visibleAttribute={visibleAttribute}
           setVisibleAttribute={(attributeObj) => setVisibleAttribute(attributeObj)}
         />
         <PedigreeTree
           pedigree={pedigree}
-          manageTreeRef={manageTreeRef}
-          visibleAttributeProps={visibleAttribute}
-          setCurrentNode={(node) => setCurrentNode(node)}
+          visibleAttribute={visibleAttribute}
           currentNode={currentNode}
+          setCurrentNode={(node) => setCurrentNode(node)}
         />
       </div>
     </Grommet>
