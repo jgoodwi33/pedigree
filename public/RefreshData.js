@@ -45,6 +45,7 @@ function createFlatJsonFile(json) {
     })
 }
 
+// saves the output json to the public directory
 // function createJsonFile(json) {
 //     fs.writeFile("./public/refreshDataAssets/newPedigree.json", JSON.stringify(json, null, 3), (err) => {
 //         if (err) throw err;
@@ -54,6 +55,7 @@ function createFlatJsonFile(json) {
 //     })
 // }
 
+// saves the output json to the src directory
 function createJsonFile(json) {
     fs.writeFile("./src/newPedigree.json", JSON.stringify(json, null, 3), (err) => {
         if (err) throw err;
@@ -123,7 +125,7 @@ function createHierarchalJson(flatJson) {
         }
     })
 
-    // TODO: create the tree structure by calling a recursive method on the root var
+    // create the tree structure by calling a recursive method on the root var
     createTree(root, parentMap);
 
     // save the tree structure to a file
