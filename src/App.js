@@ -44,7 +44,7 @@ function App() {
 
   return (
     <Grommet theme={customTheme}>
-      <div className="App" style={{ height: "100vh" }}>
+      <div className="App">
         <ManageTree
           currentNode={currentNode}
           visibleAttribute={visibleAttribute}
