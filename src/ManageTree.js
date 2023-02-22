@@ -47,7 +47,7 @@ export default function ManageTree({ currentNode, visibleAttribute, setVisibleAt
 
   return (
     <div className="manageTree">
-      <Box direction="row" gap="10px" align="center">
+      <Box direction="row" gap="10px" align="center" margin={{ bottom: "small" }}>
         <Avatar round="large" background="accent-1" a11yTitle="the head of a red standard poodle staring into the camera" src={gilHeadshot} />
         <Heading level='1' size="small" margin="none">
           Gil's Pedigree

@@ -46,11 +46,13 @@ Here's my rough plan for implementation in src/updateJson.js:
 1. ~~Ensure that a tree node is "selected" at all times~~
 1. ~~Create skip links for easy keyboard navigation between the dog details and the tree~~
 1. ~~Finish implementing the code that automatically creates a new  JSON from the spreadsheet in Google Drive~~
+1. Display a message that the site isn't compatible with mobile devices when visited from a mobile device (like wordle when you rotate it)
+1. 1. Add a modal to the about section that explains how to use keyboard nav on the site
 1. Test my JSON creation code a little bit more to make sure it works properly
+1. Try to design it so it works on mobile devices/phone screens
 1. Figure out how to address multiple instances of the same dog (aka line breeding)
 1. Fix the tab focus management behavior so when the skip link is used, focus is shifted back to the specific instance of a dog that they started at, instead of the first insatnce of that dog in the tree
 1. Add data from http://www.standardpoodledatabase.com
-1. Add a modal to the about section that explains how to use keyboard nav on the site
 1. Add a toggle that allows the user to have a node automatically centered when it receives focus
 1. Make the radio button group have an initial value of "none" set when the page loads
 1. Display a count of the total number of generations (aka the tree depth) and the currently displayed number of generations
