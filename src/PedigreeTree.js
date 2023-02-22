@@ -13,7 +13,7 @@ export default function PedigreeTree({ pedigree, visibleAttribute, currentNode, 
     <div className="treeWrapper">
       <Tree
         data={pedigree}
-        // initialDepth="4" // commented out for testing
+        initialDepth="4" // comment out for testing
         pathFunc="step"
         depthFactor="700"
         zoom=".25"
