@@ -45,11 +45,22 @@ function createFlatJsonFile(json) {
     })
 }
 
+// saves the output json to the public directory
+// function createJsonFile(json) {
+//     fs.writeFile("./public/refreshDataAssets/newPedigree.json", JSON.stringify(json, null, 3), (err) => {
+//         if (err) throw err;
+//         else {
+//             console.log("newPedigree.json was created! it can be found at ./public/refreshDataAssets/newPedigree.json");
+//         }
+//     })
+// }
+
+// saves the output json to the src directory
 function createJsonFile(json) {
-    fs.writeFile("./public/refreshDataAssets/pedigree.json", JSON.stringify(json), (err) => {
+    fs.writeFile("./src/newPedigree.json", JSON.stringify(json, null, 3), (err) => {
         if (err) throw err;
         else {
-            console.log("pedigree.json was created! it can be found at ./public/refreshDataAssets/pedigree.json");
+            console.log("newPedigree.json was created! it can be found at ./src/newPedigree.json");
         }
     })
 }
@@ -69,6 +80,24 @@ function TreeNode(element) {
     };
     this.children = [];
     this.name = element["Registered Name"];
+}
+
+function createTree(node, parentMap) {
+    if (parentMap.has(node.attributes.registrationNum)) {
+        let parents = parentMap.get(node.attributes.registrationNum)
+        if (parents[0]["Registration #"] != undefined) {
+            node.children.push(new TreeNode(parents[0]))
+        }
+        if (parents[1]["Registration #"] != undefined) {
+            node.children.push(new TreeNode(parents[1]))
+        }
+        if (node.children.length > 0) {
+            node.children.forEach((child) => { createTree(child, parentMap) })
+        }
+    } else {
+        // return, because that means that the current node does not have parent nodes  
+        return node
+    }
 }
 
 function createHierarchalJson(flatJson) {
@@ -96,8 +125,8 @@ function createHierarchalJson(flatJson) {
         }
     })
 
-    // TODO: create the tree structure by calling a recursive method on the root var
-    // TODO: write the aforementioned recursive method
+    // create the tree structure by calling a recursive method on the root var
+    createTree(root, parentMap);
 
     // save the tree structure to a file
     createJsonFile(root);
