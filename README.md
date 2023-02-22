@@ -46,8 +46,8 @@ Here's my rough plan for implementation in src/updateJson.js:
 1. ~~Ensure that a tree node is "selected" at all times~~
 1. ~~Create skip links for easy keyboard navigation between the dog details and the tree~~
 1. ~~Finish implementing the code that automatically creates a new  JSON from the spreadsheet in Google Drive~~
-1. Display a message that the site isn't compatible with mobile devices when visited from a mobile device (like wordle when you rotate it)
-1. 1. Add a modal to the about section that explains how to use keyboard nav on the site
+1. Add a collapsible section like the about section that explains how to use keyboard nav on the site
+1. Make the collapsible sections only be open by default if there's room in the parent container for it
 1. Test my JSON creation code a little bit more to make sure it works properly
 1. Try to design it so it works on mobile devices/phone screens
 1. Figure out how to address multiple instances of the same dog (aka line breeding)

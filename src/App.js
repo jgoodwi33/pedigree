@@ -3,6 +3,7 @@ import { Grommet, grommet } from 'grommet';
 import PedigreeTree from './PedigreeTree';
 import ManageTree from './ManageTree';
 import { deepMerge } from 'grommet/utils';
+import Div100vh from 'react-div-100vh'
 
 
 // const pedigree = require('./pedigree.json');
@@ -44,7 +45,7 @@ function App() {
 
   return (
     <Grommet theme={customTheme}>
-      <div className="App">
+      <Div100vh className="App">
         <ManageTree
           currentNode={currentNode}
           visibleAttribute={visibleAttribute}
@@ -56,7 +57,7 @@ function App() {
           currentNode={currentNode}
           setCurrentNode={(node) => setCurrentNode(node)}
         />
-      </div>
+      </Div100vh>
     </Grommet>
   );
 }
