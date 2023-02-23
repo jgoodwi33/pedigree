@@ -22,7 +22,7 @@ The spreadsheet with this information is stored on Google Drive, and can be view
 
 Download the spreadsheet as a CSV (manually or by visiting [this link](https://docs.google.com/spreadsheets/d/e/2PACX-1vS_t21NRDGXKya4lVd_Uijhnz-TDwqM36QyYfEncJQO-TCLCNdvT44KTe_ZafSROrJY6DW3YxdAI608/pub?gid=0&single=true&output=csv))
 
-I'm figuring out a new way to do this because I don't remember how I did it before! When my implementation is done, you'll be able to get refreshed data directly from Google Sheets by entering `npm run refresh`
+I'm figuring out a new way to do this because I don't remember how I did it before! When my implementation is done, I'll be able to get a properly formatted JSON with updated data pulled directly from Google Sheets by entering `npm run refresh`
 
 Here's my rough plan for implementation in src/updateJson.js:
 1. ~~Grab the data as a CSV from Google Sheets~~
