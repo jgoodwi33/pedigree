@@ -10,19 +10,19 @@ import Div100vh from 'react-div-100vh'
 // const pedigree = require('./pedigree.json');
 const pedigree = require('./newPedigree.json');
 
-const initialAttributes = {
-  none: true,
-  sex: false,
-  color: false,
-  birthday: false,
-  hips: false,
-};
+const radioOptions = [
+  { label: "None", value: "none" },
+  { label: "Sex", value: "sex" },
+  { label: "Color", value: "color" },
+  { label: "Birthday", value: "birthday" },
+  { label: "Hips", value: "hips" },
+];
 
 const customTheme = deepMerge(grommet, generateThemeChanges());
 
 function App() {
   const [currentNode, setCurrentNode] = useState(pedigree);
-  const [visibleAttribute, setVisibleAttribute] = useState(initialAttributes)
+  const [visibleAttribute, setVisibleAttribute] = useState(radioOptions[0])
 
   return (
     <Grommet theme={customTheme}>
@@ -31,6 +31,7 @@ function App() {
           currentNode={currentNode}
           visibleAttribute={visibleAttribute}
           setVisibleAttribute={(attributeObj) => setVisibleAttribute(attributeObj)}
+          radioOptions={radioOptions}
         />
         <PedigreeTree
           pedigree={pedigree}

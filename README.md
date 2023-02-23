@@ -49,13 +49,13 @@ Here's my rough plan for implementation in src/updateJson.js:
 1. ~~Add a collapsible section like the about section that explains how to use keyboard nav on the site~~
 1. ~~Make the collapsible sections closed by default~~
 1. ~~Make the "About" section stay sticky to the bottom~~
-1. Test my JSON creation code a little bit more to make sure it works properly
-1. Add data from http://www.standardpoodledatabase.com
+1. ~~Make the radio button group have an initial value of "none" set when the page loads~~
 1. Display a count of the total number of generations (aka the tree depth) and the currently displayed number of generations
 1. Add a toggle to switch between light and dark mode
 1. Add a toggle that allows the user to have a node automatically centered when it receives focus
+1. Test my JSON creation code a little bit more to make sure it works properly
+1. Add data from http://www.standardpoodledatabase.com
 1. Readjust the sidebar design it so it works on mobile devices/phone screens
 1. Change the base URL to my personal site instead of Github
 1. Figure out how to address multiple instances of the same dog (aka line breeding)
 1. Applicable to line-breeding scenarios only: Fix the tab focus management behavior so when the skip link is used, focus is shifted back to the specific instance of a dog that they started at, instead of the first insatnce of that dog in the tree
-1. Make the radio button group have an initial value of "none" set when the page loads

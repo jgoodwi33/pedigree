@@ -16,6 +16,16 @@ function updateCurrentNode(nodeDatum, setCurrentNode) {
     console.log(nodeDatum)
 }
 
+function getDisplayValue(visibleAttribute, nodeDatum) {
+    let label = visibleAttribute.label
+    let value = visibleAttribute.value
+    if (value !== "none") {
+        return (
+            <Text size="xxlarge">{label}: {nodeDatum.attributes[value]}</Text>
+        )
+    }
+}
+
 export default function PedigreeNode({
     nodeDatum,
     toggleNode,
@@ -34,7 +44,6 @@ export default function PedigreeNode({
                         tabIndex="0"
                         onKeyDown={(e) => handleKeyPress(e, toggleNode)}
                         onFocus={() => { updateCurrentNode(nodeDatum, setCurrentNode) }}
-                        // ref={nodeDatum.name === currentNode.name ? selectedNodeRef : {}}
                         background="light-2"
                         elevation="large"
                         fill={true}
@@ -45,10 +54,7 @@ export default function PedigreeNode({
                                 {nodeDatum.name}
                             </Heading>
                             <Box align="center" gap="small">
-                                {visibleAttribute.sex && (<Text size="xxlarge">Sex: {nodeDatum.attributes.sex}</Text>)}
-                                {visibleAttribute.color && (<Text size="xxlarge">Color: {nodeDatum.attributes.color}</Text>)}
-                                {visibleAttribute.birthday && (<Text size="xxlarge">Birthday: {nodeDatum.attributes.birthday}</Text>)}
-                                {visibleAttribute.hips && (<Text size="xxlarge">Hips: {nodeDatum.attributes.hips}</Text>)}
+                                {getDisplayValue(visibleAttribute, nodeDatum)}
                                 {nodeDatum.children.length === 0 && (
                                     <Text size="xxlarge">No Known Ancestors</Text>
                                 )}

@@ -14,29 +14,6 @@ import {
 import React from 'react';
 import gilHeadshot from './assets/gilHeadshot.png';
 
-const radioOptions = [
-  { label: "None", value: "none" },
-  { label: "Sex", value: "sex" },
-  { label: "Color", value: "color" },
-  { label: "Birthday", value: "birthday" },
-  { label: "Hips", value: "hips" },
-];
-
-const blankAttributes = {
-  none: false,
-  sex: false,
-  color: false,
-  birthday: false,
-  hips: false,
-};
-
-function setAttributeFromRadio(selectedValue, setVisibleAttribute) {
-  console.log(selectedValue)
-  let newAttributes = JSON.parse(JSON.stringify(blankAttributes))
-  newAttributes[selectedValue] = true
-  setVisibleAttribute(newAttributes)
-}
-
 function dogAttributesList(currentNode) {
   return (
     <>
@@ -64,13 +41,14 @@ function dogAttributesList(currentNode) {
   )
 }
 
-function showOnPedigreePanelContent(setVisibleAttribute) {
+function showOnPedigreePanelContent(visibleAttribute, setVisibleAttribute, radioOptions) {
   return (
     <Box margin={{ bottom: "medium" }}>
       <RadioButtonGroup
-        name="Show on Pedigree"
+        name="Display on pedigree"
         options={radioOptions}
-        onChange={(e) => setAttributeFromRadio(e.target.value, setVisibleAttribute)}
+        value={visibleAttribute.value}
+        onChange={(e) => setVisibleAttribute(radioOptions.find(opt => opt.value === e.target.value))}
       />
     </Box>
   )
@@ -105,7 +83,7 @@ function aboutInfoPanelContent() {
   )
 }
 
-export default function ManageTree({ currentNode, visibleAttribute, setVisibleAttribute }) {
+export default function ManageTree({ currentNode, visibleAttribute, setVisibleAttribute, radioOptions }) {
   return (
     <Box flex={{ grow: 1, shrink: 1 }} basis="0" background="light-2" pad="20px" overflow={{ vertical: "scroll", horizontal: "scroll" }}>
       <Box gap="xsmall" basis="full" height={{ min: "max-content" }}>
@@ -128,7 +106,7 @@ export default function ManageTree({ currentNode, visibleAttribute, setVisibleAt
         <Box flex={{ grow: 1, shrink: 0 }} justify="end">
           <Accordion multiple>
             <AccordionPanel label={<Heading level='2' size='small' margin={{ top: "small", bottom: "small" }}>Show</Heading>}>
-              {showOnPedigreePanelContent(setVisibleAttribute)}
+              {showOnPedigreePanelContent(visibleAttribute, setVisibleAttribute, radioOptions)}
             </AccordionPanel>
             <AccordionPanel label={<Heading level='2' size='small' margin={{ top: "small", bottom: "small" }}>Navigation</Heading>}>
               {navigationInfoPanelContent()}
