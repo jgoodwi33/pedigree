@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Grommet, grommet } from 'grommet';
 import PedigreeTree from './PedigreeTree';
 import ManageTree from './ManageTree';
+import { generateThemeChanges } from './Theme';
 import { deepMerge } from 'grommet/utils';
 import Div100vh from 'react-div-100vh'
 
@@ -16,28 +17,8 @@ const initialAttributes = {
   birthday: false,
   hips: false,
 };
-const customTheme = deepMerge(grommet, {
-  global: {
-    focus: {
-      outline: { color: 'focus', size: '5px' },
-      border: { color: undefined, style: undefined },
-      shadow: { color: undefined, size: undefined },
-    },
-  },
-  heading: {
-    level: {
-      2: {
-        small: {
-          size: '20px',
-          height: '20px',
-        },
-      },
-    },
-  },
-  accordion: {
-    border: undefined,
-  }
-});
+
+const customTheme = deepMerge(grommet, generateThemeChanges());
 
 function App() {
   const [currentNode, setCurrentNode] = useState(pedigree);

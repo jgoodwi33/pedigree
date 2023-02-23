@@ -7,11 +7,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
 }
-.outline {
-  outline: 5px solid blue;
-  outline: 5px solid red;
-  border: 5px solid blue;
-  border: 5px solid red;
+.App {
+  display: flex;
+  flex-direction: row;
+}
+/* this class is exposed by the react-d3 package I'm using */
+.path { 
+  stroke-width: 5;
+  fill: #797a7a;
 }
 #node.currentlySelected {
   /* background-color: #97fbb6; */
@@ -21,23 +24,9 @@ body {
   border: 20px solid #97fbb6;
   outline: none;
 }
-.path {
-  stroke-width: 5;
-  fill: #797a7a;
-}
-.App {
-  display: flex;
-  flex-direction: row;
-}
-.manageTree {
-  flex: 1 1 0;
-  display: flex;
-  flex-direction: column;
-  background-color: #ebebeb;
-  padding: 20px;
-  justify-content: flex-start;
-  gap: 10px;
-  overflow: scroll;
+#dogDetails:focus-visible {
+  outline: 5px solid #97fbb6;
+  outline-offset: 5px;
 }
 Button.moveFocusButton {
   color:#7D4CDB;
@@ -50,49 +39,12 @@ Button.moveFocusButton {
   height: 1px;
   overflow: hidden;
 }
-Button.moveFocusButton:hover {
-  text-decoration: underline;
-}
 Button.moveFocusButton:focus {
   /* the below code displays the button, but only when it's tabbed to */
   position: static;
   width: auto;
   height: auto;
 }
-.treeWrapper {
-  flex: 3 1 0;
-}
-.dogDetails {
-  display: flex;
-  flex-direction: column;
-  /* border: 5px solid red; */
-}
-.dogDetails:focus-visible {
-  outline: 5px solid #97fbb6;
-  outline-offset: 5px;
-}
-.dogAttributes {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  height: 50%;
-  /* border: 5px solid green; */
-}
-.dogAttributes div {
-  margin-bottom: 2px;
-  margin-right: 7px;
-  /* border: 5px solid purple; */
-}
-.controls {
-  display: flex;
-  flex-direction: column;
-  /* border: 5px solid yellow; */
-}
-AccordionPanel.about {
-  display: flex;
-  flex-direction: column;
-  /* border: 5px solid blue; */
-  /* gap: 10px; */
+Button.moveFocusButton:hover {
+  text-decoration: underline;
 }

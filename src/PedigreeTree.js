@@ -1,3 +1,4 @@
+import { Box } from 'grommet';
 import React from 'react';
 import Tree from 'react-d3-tree';
 import PedigreeNode from './PedigreeNode';
@@ -10,7 +11,7 @@ export default function PedigreeTree({ pedigree, visibleAttribute, currentNode, 
 
   return (
     // `<Tree />` will fill width/height of its container`.
-    <div className="treeWrapper">
+    <Box flex={{ grow: 3, shrink: 1 }} basis="0">
       <Tree
         data={pedigree}
         initialDepth="4" // comment out for testing
@@ -34,6 +35,6 @@ export default function PedigreeTree({ pedigree, visibleAttribute, currentNode, 
           })
         }
       />
-    </div>
+    </Box>
   );
 }

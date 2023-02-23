@@ -6,7 +6,7 @@ function handleKeyPress(e, toggleNode) {
         toggleNode();
     }
     if (e.key === "Enter") {
-        document.getElementsByClassName("dogDetails")[0].focus()
+        document.getElementById("dogDetails").focus()
     }
 }
 
