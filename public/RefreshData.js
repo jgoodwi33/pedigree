@@ -4,6 +4,7 @@ const { element } = require("prop-types");
 
 const getCsv = async () => {
     try {
+        // current from google drive
         const csvPedigreeUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS_t21NRDGXKya4lVd_Uijhnz-TDwqM36QyYfEncJQO-TCLCNdvT44KTe_ZafSROrJY6DW3YxdAI608/pub?gid=0&single=true&output=csv";
 
         //read .csv file on a server
@@ -16,7 +17,6 @@ const getCsv = async () => {
 
         if (res.status === 200) {
             const csvData = await res.text();
-            // console.log(csvData);
             return csvData;
 
         } else {
@@ -45,22 +45,12 @@ function createFlatJsonFile(json) {
     })
 }
 
-// saves the output json to the public directory
-// function createJsonFile(json) {
-//     fs.writeFile("./public/refreshDataAssets/newPedigree.json", JSON.stringify(json, null, 3), (err) => {
-//         if (err) throw err;
-//         else {
-//             console.log("newPedigree.json was created! it can be found at ./public/refreshDataAssets/newPedigree.json");
-//         }
-//     })
-// }
-
 // saves the output json to the src directory
 function createJsonFile(json) {
-    fs.writeFile("./src/newPedigree.json", JSON.stringify(json, null, 3), (err) => {
+    fs.writeFile("./src/pedigree.json", JSON.stringify(json, null, 3), (err) => {
         if (err) throw err;
         else {
-            console.log("newPedigree.json was created! it can be found at ./src/newPedigree.json");
+            console.log("pedigree.json was created! it can be found at ./src/pedigree.json");
         }
     })
 }
@@ -83,6 +73,11 @@ function TreeNode(element) {
 }
 
 function createTree(node, parentMap) {
+    if (node.attributes == undefined) {
+        // attempt to catch a random error that was showing up?
+        console.log("node.attributes is undefined for " + node.name)
+        return node
+    }
     if (parentMap.has(node.attributes.registrationNum)) {
         let parents = parentMap.get(node.attributes.registrationNum)
         if (parents[0]["Registration #"] != undefined) {
