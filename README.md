@@ -53,7 +53,8 @@ Here's a rough outline of my implementation in src/public/RefreshData.js:
 1. ~~Make the "About" section stay sticky to the bottom~~
 1. ~~Make the radio button group have an initial value of "none" set when the page loads~~
 1. ~~Test my JSON creation code a little bit more to make sure it works properly~~
-1. Figure out and fix the thing where screen readers read out "figure" 
+1. Fix the thing where screen readers read out "figure" 
+   1. After further research, I've realized that the current library I'm using for generating the tree is relatively inaccessible to screenreader users. I will be creating a new version of this project when time allows using an accessible tree library. The current frontrunners are https://npmtrends.com/react-accessible-treeview-vs-react-arborist-vs-react-complex-tree
 1. Display a count of the total number of generations (aka the tree depth) and the currently displayed number of generations
 1. Add a toggle to switch between light and dark mode
 1. Add a toggle that allows the user to have a node automatically centered when it receives focus

@@ -7,8 +7,8 @@ import { deepMerge } from 'grommet/utils';
 import Div100vh from 'react-div-100vh'
 
 
-// const pedigree = require('./pedigree.json');
-const pedigree = require('./newPedigree.json');
+const pedigree = require('./pedigree.json');
+const customTheme = deepMerge(grommet, generateThemeChanges());
 
 const radioOptions = [
   { label: "None", value: "none" },
@@ -17,8 +17,6 @@ const radioOptions = [
   { label: "Birthday", value: "birthday" },
   { label: "Hips", value: "hips" },
 ];
-
-const customTheme = deepMerge(grommet, generateThemeChanges());
 
 function App() {
   const [currentNode, setCurrentNode] = useState(pedigree);
