@@ -71,7 +71,7 @@ export default function PedigreeTree({ pedigree, visibleAttribute, currentNode, 
     <Box flex={{ grow: 3, shrink: 1 }} basis="0" ref={observedDiv}>
       <Tree
         data={pedigree}
-        // initialDepth="4" // comment out for testing
+        initialDepth="4" // comment out for testing
         pathFunc="step"
         depthFactor="700"
         zoom=".25"

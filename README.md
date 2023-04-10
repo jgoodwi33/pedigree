@@ -59,6 +59,7 @@ Here's a rough outline of my implementation in src/public/OriginalRefreshData.js
 1. Add a toggle to switch between light and dark mode
 1. Add data from http://www.standardpoodledatabase.com
 1. Readjust the sidebar design it so it works on mobile devices/phone screens
+1. Add some kind of search ability? A potential exaple to modify is here: https://github.com/bkrem/react-d3-tree/issues/210
 1. Change the base URL to my personal site instead of Github
 1. Figure out how to address multiple instances of the same dog (aka line breeding)
 1. Applicable to line-breeding scenarios only: Fix the tab focus management behavior so when the skip link is used, focus is shifted back to the specific instance of a dog that they started at, instead of the first insatnce of that dog in the tree
