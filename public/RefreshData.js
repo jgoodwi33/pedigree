@@ -6,10 +6,12 @@ let treeInfo = {
     numDataRowsProcessed: 0
 }
 
+const fileOutputLocation = "./src/refreshedData/current/"
+
 const getCsv = async () => {
     try {
-        // "original" sheet from google drive
-        const csvPedigreeUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS_t21NRDGXKya4lVd_Uijhnz-TDwqM36QyYfEncJQO-TCLCNdvT44KTe_ZafSROrJY6DW3YxdAI608/pub?gid=0&single=true&output=csv";
+        // "restructured" sheet from google drive
+        const csvPedigreeUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS_t21NRDGXKya4lVd_Uijhnz-TDwqM36QyYfEncJQO-TCLCNdvT44KTe_ZafSROrJY6DW3YxdAI608/pub?gid=308395222&single=true&output=csv"
 
         //read .csv file on a server
         const res = await fetch(csvPedigreeUrl, {
@@ -32,39 +34,43 @@ const getCsv = async () => {
 }
 
 function createCsvFile(csv) {
-    fs.writeFile("./src/refreshedData/original/flatPedigree.csv", csv, (err) => {
+    let fileNameAndLocation = fileOutputLocation + "flatPedigree.csv"
+    fs.writeFile(fileNameAndLocation, csv, (err) => {
         if (err) throw err;
         else {
-            console.log("pedigree.csv was created! it can be found at ./src/refreshedData/original/flatPedigree.csv");
+            console.log("pedigree.csv was created! it can be found at " + fileNameAndLocation);
         }
     })
 }
 
 function createFlatJsonFile(json) {
-    fs.writeFile("./src/refreshedData/original/flatPedigree.json", JSON.stringify(json), (err) => {
+    let fileNameAndLocation = fileOutputLocation + "flatPedigree.json"
+    fs.writeFile(fileNameAndLocation, JSON.stringify(json), (err) => {
         if (err) throw err;
         else {
-            console.log("flatPedigree.json was created! it can be found at ./src/refreshedData/original/flatPedigree.json");
+            console.log("flatPedigree.json was created! it can be found at " + fileNameAndLocation);
         }
     })
 }
 
 // saves the output json to the src directory
 function createJsonFile(json) {
-    fs.writeFile("./src/refreshedData/original/pedigree.json", JSON.stringify(json, null, 3), (err) => {
+    let fileNameAndLocation = fileOutputLocation + "pedigree.json"
+    fs.writeFile(fileNameAndLocation, JSON.stringify(json, null, 3), (err) => {
         if (err) throw err;
         else {
-            console.log("pedigree.json was created! it can be found at ./src/refreshedData/original/pedigree.json");
+            console.log("pedigree.json was created! it can be found at " + fileNameAndLocation);
         }
     })
 }
 
 // saves the treeInfo json to the src directory
 function createTreeInfoJsonFile(json) {
-    fs.writeFile("./src/refreshedData/original/treeInfo.json", JSON.stringify(json), (err) => {
+    let fileNameAndLocation = fileOutputLocation + "treeInfo.json"
+    fs.writeFile(fileNameAndLocation, JSON.stringify(json), (err) => {
         if (err) throw err;
         else {
-            console.log("treeInfo.json was created! it can be found at ./src/refreshedData/original/treeInfo.json");
+            console.log("treeInfo.json was created! it can be found at " + fileNameAndLocation);
         }
     })
 }
