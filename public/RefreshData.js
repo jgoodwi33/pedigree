@@ -76,6 +76,7 @@ function createTreeInfoJsonFile(json) {
 }
 
 function TreeNode(element) {
+    this.name = element["Registered Name"];
     this.attributes = {
         registrationNum: element["Registration #"],
         registrationType: element["Registration Type"],
@@ -86,33 +87,53 @@ function TreeNode(element) {
         chicNum: element["CHIC #"],
         hips: element["Hips"],
         ofaLink: element["OFA Link"],
-        offspringRegistrationNum: element["Child Reg #"]
+        parent1RegistrationNum: element["Mother Reg #"],
+        parent2RegistrationNum: element["Father Reg #"]
     };
     this.children = [];
-    this.name = element["Registered Name"];
 }
 
-function createTree(node, parentMap) {
+function createTree(node, dogMap) {
     // count the total number of nodes in the tree
     treeInfo.totalNumNodes++
 
     if (node.attributes != undefined) {
-        // add the current node and any of its child nodes to the tree 
-        if (parentMap.has(node.attributes.registrationNum)) {
-            let parents = parentMap.get(node.attributes.registrationNum)
-            if (parents[0]["Registration #"] != undefined) {
-                node.children.push(new TreeNode(parents[0]))
+        let parent1RegNum = node.attributes.parent1RegistrationNum
+        let parent2RegNum = node.attributes.parent2RegistrationNum
+        let hasAtLeastOneParent = (parent1RegNum != "Unknown") && (parent2RegNum != "Unknown")
+        if (hasAtLeastOneParent) {
+            // add the current node and its child nodes (mother and father) to the tree 
+            if (dogMap.has(parent1RegNum)) {
+                let parent1 = dogMap.get(parent1RegNum)
+                node.children.push(new TreeNode(parent1))
             }
-            if (parents[1]["Registration #"] != undefined) {
-                node.children.push(new TreeNode(parents[1]))
+            if (dogMap.has(parent2RegNum)) {
+                let parent2 = dogMap.get(parent2RegNum)
+                node.children.push(new TreeNode(parent2))
             }
             if (node.children.length > 0) {
-                node.children.forEach((child) => { createTree(child, parentMap) })
+                node.children.forEach((child) => { createTree(child, dogMap) })
             }
         } else {
-            // return, because that means that the current node does not have parent nodes  
+            // return, because that means that the current dog does not have known parents  
             return node
         }
+
+        // if (dogMap.has(node.attributes.registrationNum)) {
+        //     // let parents = dogMap.get(node.attributes.registrationNum)
+        //     if (parents[0]["Registration #"] != undefined) {
+        //         node.children.push(new TreeNode(parents[0]))
+        //     }
+        //     if (parents[1]["Registration #"] != undefined) {
+        //         node.children.push(new TreeNode(parents[1]))
+        //     }
+        //     if (node.children.length > 0) {
+        //         node.children.forEach((child) => { createTree(child, dogMap) })
+        //     }
+        // } else {
+        //     // return, because that means that the current node does not have parent nodes  
+        //     return node
+        // }
     } else {
         // attempt to catch a random error that was showing up?
         console.log("node.attributes is undefined for " + node.name)
@@ -121,37 +142,23 @@ function createTree(node, parentMap) {
 }
 
 function createHierarchalJson(flatJson) {
-    let root;
-    let parentMap = new Map();
-
     // create a map from the flat json
-    //      key: offspring reg # 
-    //      value: an array that holds both dogs with that offspring reg #
-    flatJson.forEach(element => {
-        // if its child reg # is "None", create a root node object with that item's data
-        if (element['Child Reg #'] == "None") {
-            root = new TreeNode(element);
-        } else { // else, check if the child reg # is already in the map
-            if (parentMap.has(element['Child Reg #'])) {
-                // if it is, insert the object at map[childRegNum][1]
-                let parent1 = parentMap.get(element['Child Reg #']);
-                let parent2 = element;
-                let parentArray = [parent1, parent2]
-                parentMap.set(element['Child Reg #'], parentArray)
-            } else {
-                // if it isn't, insert the object at map[childRegNum][0]
-                parentMap.set(element['Child Reg #'], element)
-            }
-        }
+    //      key: registration # 
+    //      value: the dog's data as an object
+    let dogMap = new Map();
+    flatJson.forEach(dog => {
+        dogMap.set(dog['Registration #'], dog)
         // count how many rows of data are processed
         treeInfo.numDataRowsProcessed++
     })
 
     // create the tree structure by calling a recursive method on the root var
-    createTree(root, parentMap);
+    const gilsRegistrationNum = 'PR23772310'
+    let root = new TreeNode(dogMap.get(gilsRegistrationNum))
+    createTree(root, dogMap)
 
     // save the tree structure to a file
-    createJsonFile(root);
+    createJsonFile(root)
 }
 
 async function main() {
