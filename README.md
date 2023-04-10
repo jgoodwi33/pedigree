@@ -20,13 +20,15 @@ https://bkrem.github.io/react-d3-tree/docs/#event-handlers
 
 The spreadsheet with this information is stored on Google Drive, and can be viewed at: https://docs.google.com/spreadsheets/d/1p4TJlhcRKeuopBKsnmk4RM5sHm--sjfNvDhhjz4_b_M/edit?usp=sharing. 
 
-The spreadsheet can also be downloaded as a CSV from [this link](https://docs.google.com/spreadsheets/d/e/2PACX-1vS_t21NRDGXKya4lVd_Uijhnz-TDwqM36QyYfEncJQO-TCLCNdvT44KTe_ZafSROrJY6DW3YxdAI608/pub?gid=0&single=true&output=csv).
-
 I had to figure out a new way to do this in January of 2023 because I forgot how I did it when I first started this project in July of 2021. All I remembered was that I originally used several different web-based converters to convert the data to a formatted JSON.
 
 After spending some time on the implementation, I can now generate a properly formatted JSON with updated data pulled directly from Google Sheets by entering `npm run refresh`
 
-Here's a rough outline of my implementation in src/public/RefreshData.js:
+## Current Refresh Data
+I reworked the spreadsheet and the code to better handle duplicates and line breeding. Each dog now keeps track of both parent registration numbers, instead of a single offspring regiatration number. The code to generate the json has been changed to reflect this.
+
+## Original Refresh Data
+Here's a rough outline of my implementation in src/public/OriginalRefreshData.js:
 1. Grab the data as a CSV from Google Sheets
 1. Convert the CSV into a single-level JSON
 1. Save each item in the flat JSON to a key/value data structure with the key for each item being its "Offspring Reg #"
