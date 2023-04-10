@@ -53,13 +53,14 @@ Here's a rough outline of my implementation in src/public/RefreshData.js:
 1. ~~Make the "About" section stay sticky to the bottom~~
 1. ~~Make the radio button group have an initial value of "none" set when the page loads~~
 1. ~~Test my JSON creation code a little bit more to make sure it works properly~~
-1. Fix the thing where screen readers read out "figure" 
-   1. After further research, I've realized that the current library I'm using for generating the tree is relatively inaccessible to screenreader users. I will be creating a new version of this project when time allows using an accessible tree library. The current frontrunners are https://npmtrends.com/react-accessible-treeview-vs-react-arborist-vs-react-complex-tree
 1. Display a count of the total number of generations (aka the tree depth) and the currently displayed number of generations
 1. Add a toggle to switch between light and dark mode
-1. Add a toggle that allows the user to have a node automatically centered when it receives focus
 1. Add data from http://www.standardpoodledatabase.com
 1. Readjust the sidebar design it so it works on mobile devices/phone screens
 1. Change the base URL to my personal site instead of Github
 1. Figure out how to address multiple instances of the same dog (aka line breeding)
 1. Applicable to line-breeding scenarios only: Fix the tab focus management behavior so when the skip link is used, focus is shifted back to the specific instance of a dog that they started at, instead of the first insatnce of that dog in the tree
+1. Fix the thing where screen readers read out "figure" 
+   1. After further research, I've realized that the current library I'm using for generating the tree is relatively inaccessible to screenreader users. I will be creating a new version of this project when time allows using an accessible tree library. The current frontrunners are explained here: https://npmtrends.com/react-accessible-treeview-vs-react-arborist-vs-react-complex-tree
+1. Add a toggle that allows the user to have a node automatically centered when it receives focus
+   1. After further research, I've discovered a bug in the react-d3-tree package. This change on hold until I have the time to fork react-d3-tree and fix the bug.

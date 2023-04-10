@@ -1,6 +1,12 @@
 const fs = require("fs");
 const csvToJson = require('csvtojson');
-const { element } = require("prop-types");
+
+let treeInfo = {
+    totalNumNodes: 0,
+    numDataRowsProcessed: 0
+}
+
+let counted
 
 const getCsv = async () => {
     try {
@@ -28,19 +34,19 @@ const getCsv = async () => {
 }
 
 function createCsvFile(csv) {
-    fs.writeFile("./public/refreshDataAssets/pedigree.csv", csv, (err) => {
+    fs.writeFile("./src/refreshedData/original/pedigree.csv", csv, (err) => {
         if (err) throw err;
         else {
-            console.log("pedigree.csv was created! it can be found at ./public/refreshDataAssets/pedigree.csv");
+            console.log("pedigree.csv was created! it can be found at ./src/refreshedData/original/pedigree.csv");
         }
     })
 }
 
 function createFlatJsonFile(json) {
-    fs.writeFile("./public/refreshDataAssets/flatPedigree.json", JSON.stringify(json), (err) => {
+    fs.writeFile("./src/refreshedData/original/flatPedigree.json", JSON.stringify(json), (err) => {
         if (err) throw err;
         else {
-            console.log("flatPedigree.json was created! it can be found at ./public/refreshDataAssets/flatPedigree.json");
+            console.log("flatPedigree.json was created! it can be found at ./src/refreshedData/original/flatPedigree.json");
         }
     })
 }
@@ -50,7 +56,17 @@ function createJsonFile(json) {
     fs.writeFile("./src/pedigree.json", JSON.stringify(json, null, 3), (err) => {
         if (err) throw err;
         else {
-            console.log("pedigree.json was created! it can be found at ./src/pedigree.json");
+            console.log("pedigree.json was created! it can be found at ./src/refreshedData/original/pedigree.json");
+        }
+    })
+}
+
+// saves the treeInfo json to the src directory
+function createTreeInfoJsonFile(json) {
+    fs.writeFile("./src/refreshedData/original/treeInfo.json", JSON.stringify(json), (err) => {
+        if (err) throw err;
+        else {
+            console.log("treeInfo.json was created! it can be found at ./src/refreshedData/original/treeInfo.json");
         }
     })
 }
@@ -73,30 +89,35 @@ function TreeNode(element) {
 }
 
 function createTree(node, parentMap) {
-    if (node.attributes == undefined) {
-        // attempt to catch a random error that was showing up?
-        console.log("node.attributes is undefined for " + node.name)
-        return node
-    }
-    if (parentMap.has(node.attributes.registrationNum)) {
-        let parents = parentMap.get(node.attributes.registrationNum)
-        if (parents[0]["Registration #"] != undefined) {
-            node.children.push(new TreeNode(parents[0]))
-        }
-        if (parents[1]["Registration #"] != undefined) {
-            node.children.push(new TreeNode(parents[1]))
-        }
-        if (node.children.length > 0) {
-            node.children.forEach((child) => { createTree(child, parentMap) })
+    // count the total number of nodes in the tree
+    treeInfo.totalNumNodes++
+
+    if (node.attributes != undefined) {
+        // add the current node and any of its child nodes to the tree 
+        if (parentMap.has(node.attributes.registrationNum)) {
+            let parents = parentMap.get(node.attributes.registrationNum)
+            if (parents[0]["Registration #"] != undefined) {
+                node.children.push(new TreeNode(parents[0]))
+            }
+            if (parents[1]["Registration #"] != undefined) {
+                node.children.push(new TreeNode(parents[1]))
+            }
+            if (node.children.length > 0) {
+                node.children.forEach((child) => { createTree(child, parentMap) })
+            }
+        } else {
+            // return, because that means that the current node does not have parent nodes  
+            return node
         }
     } else {
-        // return, because that means that the current node does not have parent nodes  
+        // attempt to catch a random error that was showing up?
+        console.log("node.attributes is undefined for " + node.name)
         return node
     }
 }
 
 function createHierarchalJson(flatJson) {
-    var root;
+    let root;
     let parentMap = new Map();
 
     // create a map from the flat json
@@ -118,6 +139,8 @@ function createHierarchalJson(flatJson) {
                 parentMap.set(element['Child Reg #'], element)
             }
         }
+        // count how many rows of data are processed
+        treeInfo.numDataRowsProcessed++
     })
 
     // create the tree structure by calling a recursive method on the root var
@@ -134,11 +157,15 @@ async function main() {
         .then(csv => { createCsvFile(csv); })
         // convert the csv file to a flat json array, then save that to a json file
         .then(() => {
-            csvToJson().fromFile("./public/refreshDataAssets/pedigree.csv")
+            csvToJson().fromFile("./src/refreshedData/original/pedigree.csv")
                 .then(json => {
                     createFlatJsonFile(json);
                     createHierarchalJson(json);
-                });
+                })
+                // save other info about the data, like how many total nodes and the depth 
+                .then(() => {
+                    createTreeInfoJsonFile(treeInfo);
+                })
         })
 }
 

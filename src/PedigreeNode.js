@@ -12,7 +12,7 @@ function handleKeyPress(e, toggleNode) {
 
 function updateCurrentNode(nodeDatum, setCurrentNode) {
     setCurrentNode(nodeDatum)
-    console.log("current node set to " + nodeDatum.name)
+    // console.log("current node set to " + nodeDatum.name)
     console.log(nodeDatum)
 }
 
