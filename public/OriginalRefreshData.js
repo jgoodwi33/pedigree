@@ -53,7 +53,7 @@ function createFlatJsonFile(json) {
 
 // saves the output json to the src directory
 function createJsonFile(json) {
-    fs.writeFile("./src/pedigree.json", JSON.stringify(json, null, 3), (err) => {
+    fs.writeFile("./src/refreshedData/original/pedigree.json", JSON.stringify(json, null, 3), (err) => {
         if (err) throw err;
         else {
             console.log("pedigree.json was created! it can be found at ./src/refreshedData/original/pedigree.json");
