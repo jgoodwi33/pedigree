@@ -161,7 +161,7 @@ async function main() {
         .then(csv => { createCsvFile(csv); })
         // convert the csv file to a flat json array, then save that to a json file
         .then(() => {
-            csvToJson().fromFile("./src/refreshedData/original/pedigree.csv")
+            csvToJson().fromFile("./src/refreshedData/current/flatPedigree.csv")
                 .then(json => {
                     createFlatJsonFile(json);
                     createHierarchalJson(json);
