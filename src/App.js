@@ -6,8 +6,8 @@ import { generateThemeChanges } from './Theme';
 import { deepMerge } from 'grommet/utils';
 import Div100vh from 'react-div-100vh'
 
-const pedigree = require('./pedigree.json');
-const treeInfo = require('./treeInfo.json');
+const pedigree = require('./refreshedData/original/pedigree.json');
+const treeInfo = require('./refreshedData/original/treeInfo.json');
 const customTheme = deepMerge(grommet, generateThemeChanges());
 
 const radioOptions = [
