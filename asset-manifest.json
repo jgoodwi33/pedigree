@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/pedigree/static/css/main.48e9f62c.css",
-    "main.js": "/pedigree/static/js/main.8363efdc.js",
+    "main.js": "/pedigree/static/js/main.1718a3e5.js",
     "static/media/gilHeadshot.png": "/pedigree/static/media/gilHeadshot.45ce40531b4d67fcdebe.png",
     "index.html": "/pedigree/index.html",
     "main.48e9f62c.css.map": "/pedigree/static/css/main.48e9f62c.css.map",
-    "main.8363efdc.js.map": "/pedigree/static/js/main.8363efdc.js.map"
+    "main.1718a3e5.js.map": "/pedigree/static/js/main.1718a3e5.js.map"
   },
   "entrypoints": [
     "static/css/main.48e9f62c.css",
-    "static/js/main.8363efdc.js"
+    "static/js/main.1718a3e5.js"
   ]
 }
