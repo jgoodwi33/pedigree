@@ -5,16 +5,18 @@ let treeInfo = {
     totalNumNodes: 0,
     numDataRowsProcessed: 0
 }
+const csvPedigreeUrlMaster = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR83JOZGkPgcr9c62zHgYQYCKUICpeIsomrfbrkqmj6LkKMGb4EU7B_AvoT9w2ErzWmFsdDDqfmfrPR/pub?gid=0&single=true&output=csv'
 
 const fileOutputLocation = "./src/refreshedData/current/"
 
 const getCsv = async () => {
     try {
         // "restructured" sheet from google drive
-        const csvPedigreeUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS_t21NRDGXKya4lVd_Uijhnz-TDwqM36QyYfEncJQO-TCLCNdvT44KTe_ZafSROrJY6DW3YxdAI608/pub?gid=308395222&single=true&output=csv"
+        const csvPedigreeUrlMaster = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR83JOZGkPgcr9c62zHgYQYCKUICpeIsomrfbrkqmj6LkKMGb4EU7B_AvoT9w2ErzWmFsdDDqfmfrPR/pub?gid=0&single=true&output=csv'
+
 
         //read .csv file on a server
-        const res = await fetch(csvPedigreeUrl, {
+        const res = await fetch(csvPedigreeUrlMaster, {
             method: 'get',
             headers: {
                 'content-type': 'text/csv;charset=UTF-8',
@@ -76,19 +78,20 @@ function createTreeInfoJsonFile(json) {
 }
 
 function TreeNode(element) {
-    this.name = element["Registered Name"];
+    this.name = element["name"];
     this.attributes = {
-        registrationNum: element["Registration #"],
-        registrationType: element["Registration Type"],
-        sex: element["Sex"],
-        color: element["Color"],
-        birthday: element["Birthday"],
-        dnaInfo: element["DNA Info"],
-        chicNum: element["CHIC #"],
-        hips: element["Hips"],
-        ofaLink: element["OFA Link"],
-        parent1RegistrationNum: element["Mother Reg #"],
-        parent2RegistrationNum: element["Father Reg #"]
+        registrationNum: element["regNum"],
+        regName: element["regName"],
+        gender: element["gender"],
+        color: element["color"],
+        sire: element["sire"],
+        dam: element["dam"],
+        testing: element["testing"],
+        ofa: element["ofa"],
+        img: element["img"],
+        bgColor: element["bgColor"],
+        sireId: element["sireId"],
+        damId: element["damId"]
     };
     this.children = [];
 }
@@ -98,18 +101,18 @@ function createTree(node, dogMap) {
     treeInfo.totalNumNodes++
 
     if (node.attributes != undefined) {
-        let parent1RegNum = node.attributes.parent1RegistrationNum
-        let parent2RegNum = node.attributes.parent2RegistrationNum
-        let hasAtLeastOneParent = (parent1RegNum != "Unknown") && (parent2RegNum != "Unknown")
+        let sireId = node.attributes.sireId
+        let damId = node.attributes.damId
+        let hasAtLeastOneParent = (sireId != "Unknown") && (damId != "Unknown")
         if (hasAtLeastOneParent) {
             // add the current node and its child nodes (mother and father) to the tree 
-            if (dogMap.has(parent1RegNum)) {
-                let parent1 = dogMap.get(parent1RegNum)
-                node.children.push(new TreeNode(parent1))
+            if (dogMap.has(sireId)) {
+                let sire = dogMap.get(sireId)
+                node.children.push(new TreeNode(sire))
             }
-            if (dogMap.has(parent2RegNum)) {
-                let parent2 = dogMap.get(parent2RegNum)
-                node.children.push(new TreeNode(parent2))
+            if (dogMap.has(damId)) {
+                let dam = dogMap.get(damId)
+                node.children.push(new TreeNode(dam))
             }
             if (node.children.length > 0) {
                 node.children.forEach((child) => { createTree(child, dogMap) })
@@ -147,13 +150,13 @@ function createHierarchalJson(flatJson) {
     //      value: the dog's data as an object
     let dogMap = new Map();
     flatJson.forEach(dog => {
-        dogMap.set(dog['Registration #'], dog)
+        dogMap.set(dog['regNum'], dog)
         // count how many rows of data are processed
         treeInfo.numDataRowsProcessed++
     })
 
     // create the tree structure by calling a recursive method on the root var
-    const gilsRegistrationNum = 'PR23772310'
+    const gilsRegistrationNum ='1'
     let root = new TreeNode(dogMap.get(gilsRegistrationNum))
     createTree(root, dogMap)
 
